@@ -1,5 +1,15 @@
+import Hero from '../components/Hero'
+import CategoriesPreview from '../components/CategoriesPreview'
+import FeaturedProducts from '../components/FeaturedProducts'
+
 function Home() {
-  return <h1 className="text-2xl font-bold p-6">Home Page</h1>
+  return (
+    <>
+      <Hero />
+      <CategoriesPreview />
+      <FeaturedProducts />
+    </>
+  )
 }
 
 export default Home
