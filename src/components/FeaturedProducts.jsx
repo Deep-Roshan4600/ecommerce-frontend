@@ -12,7 +12,7 @@ function FeaturedProducts() {
       try {
         setLoading(true)
         const data = await getAllProducts(8)
-        setProducts(data)
+        setProducts(data.products)
       } catch (err) {
         setError('Failed to load products. Please try again later.')
       } finally {

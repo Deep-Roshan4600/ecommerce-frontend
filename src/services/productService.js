@@ -1,8 +1,8 @@
 import api from './api'
 
-export const getAllProducts = async (limit = 20) => {
-  const response = await api.get(`/products?limit=${limit}`)
-  return response.data.products
+export const getAllProducts = async (limit = 20, skip = 0) => {
+  const response = await api.get(`/products?limit=${limit}&skip=${skip}`)
+  return response.data
 }
 
 export const getProductById = async (id) => {
@@ -17,10 +17,10 @@ export const getCategories = async () => {
 
 export const getProductsByCategory = async (category) => {
   const response = await api.get(`/products/category/${category}`)
-  return response.data.products
+  return response.data
 }
 
 export const searchProducts = async (query) => {
   const response = await api.get(`/products/search?q=${query}`)
-  return response.data.products
+  return response.data
 }
