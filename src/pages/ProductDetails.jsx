@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
 import { formatPriceINR } from '../utils/formatCurrency'
+import { useCart } from '../context/CartContext'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 function ProductDetails() {
@@ -9,6 +10,7 @@ function ProductDetails() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { addToCart } = useCart()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -65,7 +67,10 @@ function ProductDetails() {
             {formatPriceINR(product.price)}
           </p>
 
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition">
+          <button
+            onClick={() => addToCart(product)}
+            className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
+          >
             Add to Cart
           </button>
         </div>

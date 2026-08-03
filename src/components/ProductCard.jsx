@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom'
 import { formatPriceINR } from '../utils/formatCurrency'
+import { useCart } from '../context/CartContext'
 
 function ProductCard({ product }) {
+  const { addToCart } = useCart()
+
+  const handleAddToCart = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    addToCart(product)
+  }
+
   return (
     <Link
       to={`/products/${product.id}`}
@@ -14,7 +23,13 @@ function ProductCard({ product }) {
       />
       <h3 className="font-semibold text-sm line-clamp-2 mb-1">{product.title}</h3>
       <p className="text-gray-500 text-xs capitalize mb-2">{product.category}</p>
-      <p className="text-blue-600 font-bold">{formatPriceINR(product.price)}</p>
+      <p className="text-blue-600 font-bold mb-3">{formatPriceINR(product.price)}</p>
+      <button
+        onClick={handleAddToCart}
+        className="mt-auto bg-blue-600 text-white text-sm py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Add to Cart
+      </button>
     </Link>
   )
 }
