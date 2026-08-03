@@ -38,7 +38,7 @@ function Cart() {
 
       <div className="flex flex-col gap-4 mb-8">
         {cartItems.map((item) => (
-          <div key={item.id} className="flex items-center gap-4 bg-white shadow rounded-lg p-4">
+          <div key={item.id} className="flex flex-col sm:flex-row sm:items-center gap-4 bg-white shadow rounded-lg p-4">
             <img src={item.thumbnail} alt={item.title} className="w-20 h-20 object-contain" />
 
             <div className="flex-1">
@@ -47,32 +47,34 @@ function Cart() {
               <p className="text-blue-600 font-bold mt-1">{formatPriceINR(item.price)}</p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between sm:justify-end gap-4">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => decreaseQuantity(item.id)}
+                  className="w-8 h-8 border rounded-full flex items-center justify-center hover:bg-gray-100"
+                >
+                  −
+                </button>
+                <span className="w-6 text-center">{item.quantity}</span>
+                <button
+                  onClick={() => increaseQuantity(item.id)}
+                  className="w-8 h-8 border rounded-full flex items-center justify-center hover:bg-gray-100"
+                >
+                  +
+                </button>
+              </div>
+
+              <p className="w-20 sm:w-24 text-right font-semibold">
+                {formatPriceINR(item.price * item.quantity)}
+              </p>
+
               <button
-                onClick={() => decreaseQuantity(item.id)}
-                className="w-8 h-8 border rounded-full flex items-center justify-center hover:bg-gray-100"
+                onClick={() => removeFromCart(item.id)}
+                className="text-red-500 hover:text-red-700 text-sm"
               >
-                −
-              </button>
-              <span className="w-6 text-center">{item.quantity}</span>
-              <button
-                onClick={() => increaseQuantity(item.id)}
-                className="w-8 h-8 border rounded-full flex items-center justify-center hover:bg-gray-100"
-              >
-                +
+                Remove
               </button>
             </div>
-
-            <p className="w-24 text-right font-semibold">
-              {formatPriceINR(item.price * item.quantity)}
-            </p>
-
-            <button
-              onClick={() => removeFromCart(item.id)}
-              className="text-red-500 hover:text-red-700 text-sm"
-            >
-              Remove
-            </button>
           </div>
         ))}
       </div>
