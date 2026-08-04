@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getAllProducts } from '../services/productService'
 import ProductCard from './ProductCard'
+import ProductCardSkeleton from './ProductCardSkeleton'
 
 function FeaturedProducts() {
   const [products, setProducts] = useState([])
@@ -23,12 +24,17 @@ function FeaturedProducts() {
   }, [])
 
   if (loading) {
-    return (
-      <section className="max-w-7xl mx-auto px-4 py-12 text-center">
-        <p className="text-gray-500">Loading products...</p>
-      </section>
-    )
-  }
+  return (
+    <section className="max-w-7xl mx-auto px-4 py-12">
+      <h2 className="text-2xl font-bold mb-6">Featured Products</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <ProductCardSkeleton key={index} />
+        ))}
+      </div>
+    </section>
+  )
+}
 
   if (error) {
     return (

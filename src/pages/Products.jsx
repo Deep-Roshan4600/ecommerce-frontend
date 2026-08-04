@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { getAllProducts, getCategories } from '../services/productService'
 import ProductCard from '../components/ProductCard'
-import LoadingSpinner from '../components/LoadingSpinner'
+import ProductCardSkeleton from '../components/ProductCardSkeleton'
 
 const PAGE_SIZE = 12
 
@@ -71,7 +71,18 @@ function Products() {
     setVisibleCount((prevCount) => prevCount + PAGE_SIZE)
   }
 
-  if (loading) return <LoadingSpinner />
+  if (loading) {
+    return (
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold mb-6">Featured Products</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <ProductCardSkeleton key={index} />
+          ))}
+        </div>
+      </section>
+    )
+  }
 
   if (error) {
     return (

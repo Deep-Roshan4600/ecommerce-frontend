@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/productService'
 import { formatPriceINR } from '../utils/formatCurrency'
 import { useCart } from '../context/CartContext'
+import { useToast } from '../context/ToastContext'
 import LoadingSpinner from '../components/LoadingSpinner'
 
 function ProductDetails() {
@@ -11,6 +12,7 @@ function ProductDetails() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const { addToCart } = useCart()
+  const { showToast } = useToast()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -68,7 +70,10 @@ function ProductDetails() {
           </p>
 
           <button
-            onClick={() => addToCart(product)}
+            onClick={() => {
+              addToCart(product)
+              showToast(`${product.title} added to cart`)
+            }}
             className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition"
           >
             Add to Cart

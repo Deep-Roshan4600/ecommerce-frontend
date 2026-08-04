@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom'
 import { formatPriceINR } from '../utils/formatCurrency'
 import { useCart } from '../context/CartContext'
+import { useToast } from '../context/ToastContext'
 
 function ProductCard({ product }) {
   const { addToCart } = useCart()
+  const { showToast } = useToast()
 
   const handleAddToCart = (e) => {
     e.preventDefault()
     e.stopPropagation()
     addToCart(product)
+    showToast(`${product.title} added to cart`)
   }
 
   return (

@@ -6,6 +6,7 @@ import Products from './pages/Products'
 import ProductDetails from './pages/ProductDetails'
 import Categories from './pages/Categories'
 import Cart from './pages/Cart'
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
