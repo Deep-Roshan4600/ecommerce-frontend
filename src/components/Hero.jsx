@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 function Hero() {
   return (
     <section className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
@@ -9,11 +10,12 @@ function Hero() {
           Discover thousands of products at unbeatable prices, delivered to your door.
         </p>
         
-        <a href="/products"
-          className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition">
-        
+        <Link
+          to="/products"
+          className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition"
+        >
           Shop Now
-        </a>
+        </Link>
       </div>
     </section>
   )
